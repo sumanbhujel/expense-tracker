@@ -120,7 +120,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-//    public void showLoginForm(View view) {
-//        startActivity(new Intent(this, LoginActivity.class));
-//    }
+    public void showLoginForm(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
 }

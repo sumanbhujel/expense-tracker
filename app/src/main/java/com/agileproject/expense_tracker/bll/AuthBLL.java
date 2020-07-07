@@ -49,6 +49,26 @@ public class AuthBLL {
         return isSignUpSuccessful;
     }
 
+    public User loginUser(String email, String password) {
+        User user = null;
+        Call<UserResponse> loginCall = authAPI.loginUser(email, password);
+
+        try {
+            Response<UserResponse> loginResponse = loginCall.execute();
+            if (!loginResponse.isSuccessful()) {
+                apiError = gson.fromJson(loginResponse.errorBody().string(), ApiError.class);
+                authListener.onError(apiError.getError());
+//                return user;
+            } else if (loginResponse.body().getUser() != null) {
+                user = loginResponse.body().getUser();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
 
     public interface AuthListener{
         void onError(Error error);
