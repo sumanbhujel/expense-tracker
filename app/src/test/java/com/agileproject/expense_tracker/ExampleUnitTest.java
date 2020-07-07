@@ -1,4 +1,4 @@
-package com.agileproject.expense_tracker_app;
+package com.agileproject.expense_tracker;
 
 import org.junit.Test;
 
