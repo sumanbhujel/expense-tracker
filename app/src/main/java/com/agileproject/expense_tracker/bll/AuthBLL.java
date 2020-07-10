@@ -30,6 +30,7 @@ public class AuthBLL {
         apiError = new ApiError();
     }
 
+    //user registration function
     public boolean registerUser(User user) {
         boolean isSignUpSuccessful = false;
 
@@ -51,6 +52,7 @@ public class AuthBLL {
         return isSignUpSuccessful;
     }
 
+    //user login function
     public User loginUser(String email, String password) {
         User user = null;
         Call<UserResponse> loginCall = authAPI.loginUser(email, password);
@@ -69,6 +71,22 @@ public class AuthBLL {
         }
 
         return user;
+    }
+
+    public UserResponse getIncomeExpense(String id) {
+        UserResponse userResponse = null;
+        Call<UserResponse> userResponseCall = authAPI.getIncomeExpense(id);
+        try {
+            Response<UserResponse> incomeExpenseCall = userResponseCall.execute();
+            if (!incomeExpenseCall.isSuccessful()) {
+                return userResponse;
+            }
+            userResponse = incomeExpenseCall.body();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userResponse;
     }
 
 

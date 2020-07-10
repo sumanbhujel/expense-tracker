@@ -19,7 +19,7 @@ public class User {
         return firstName;
     }
 
-    public String getFamilyName() {
+    public String getLastName() {
         return lastName;
     }
 

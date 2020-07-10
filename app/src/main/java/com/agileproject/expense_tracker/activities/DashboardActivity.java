@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.agileproject.expense_tracker.R;
+import com.agileproject.expense_tracker.bll.AuthBLL;
+import com.agileproject.expense_tracker.helper.Helper;
 import com.agileproject.expense_tracker.helper.UserSession;
+import com.agileproject.expense_tracker.response.UserResponse;
 
 public class DashboardActivity extends AppCompatActivity implements CardView.OnClickListener {
 
@@ -48,6 +51,11 @@ public class DashboardActivity extends AppCompatActivity implements CardView.OnC
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.cardViewProfile:
+                Intent i1 = new Intent(DashboardActivity.this, ProfileActivity.class);
+                startActivity(i1);
+                break;
             case R.id.cardCategory:
                 //Intent i1 = new Intent(DashboardActivity.this, CategoryActivity.class);
                 //startActivity(i1);
@@ -68,12 +76,26 @@ public class DashboardActivity extends AppCompatActivity implements CardView.OnC
 //                Intent i5 = new Intent(DashboardActivity.this, ChartActivity.class);
 //                startActivity(i5);
                 break;
-            case R.id.cardViewProfile:
-//                Intent i6 = new Intent(DashboardActivity.this, ProfileActivity.class);
-//                startActivity(i6);
-                break;
+
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showIncomeExpense();
+    }
+
+    public void showIncomeExpense() {
+        Helper.StrictMode();
+        AuthBLL authImpl = new AuthBLL();
+        UserResponse userResponse = authImpl.getIncomeExpense(userSession.getUser().get_id());
+        double income = userResponse.getUser().getTotalIncome();
+        double expense = userResponse.getUser().getTotalExpense();
+        incomeValue.setText(String.valueOf(income));
+        expenseValue.setText(String.valueOf(expense));
+        balance.setText(String.valueOf(income - expense));
     }
 
 
