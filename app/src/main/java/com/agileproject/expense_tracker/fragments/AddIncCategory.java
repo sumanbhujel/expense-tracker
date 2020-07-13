@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.agileproject.expense_tracker_app.R;
+import com.agileproject.expense_tracker.R;
+
 
 public class AddIncCategory extends Fragment {
 
@@ -28,6 +29,10 @@ public class AddIncCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_inc_category, container, false);
+        //return inflater.inflate(R.layout.fragment_add_inc_category, container, false);
+
+        View incCategoryView = inflater.inflate(R.layout.fragment_add_inc_category, container, false);
+
+        return incCategoryView;
     }
 }
