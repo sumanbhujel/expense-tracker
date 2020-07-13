@@ -12,22 +12,27 @@ public class Category {
     }
 
     public String get_id() {
+
         return _id;
     }
 
     public String getName() {
+
         return name;
     }
 
     public String getType() {
+
         return type;
     }
 
     public String getIcon() {
+
         return icon;
     }
 
     public String getCreator() {
+
         return creator;
     }
 }

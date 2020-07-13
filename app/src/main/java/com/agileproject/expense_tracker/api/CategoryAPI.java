@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface CategoryAPI {
 
-    //    add a new category
+    //add a new category
     @POST("categories")
     Call<CategoryResponse> createNewCategory(@Body Category category);
 }
