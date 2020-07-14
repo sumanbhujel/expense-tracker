@@ -1,12 +1,12 @@
 package com.agileproject.expense_tracker.helper;
 
-import com.agileproject.expense_tracker.models.Error;
+import com.agileproject.expense_tracker.models.Errors;
 
 public class ApiError {
 
-    private Error error;
+    private Errors errors;
 
-    public Error getError() {
-        return error;
+    public Errors getErrors() {
+        return errors;
     }
 }

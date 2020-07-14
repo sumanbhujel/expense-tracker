@@ -13,7 +13,7 @@ import com.agileproject.expense_tracker.bll.AuthBLL;
 import com.agileproject.expense_tracker.helper.EditTextValidation;
 import com.agileproject.expense_tracker.helper.Helper;
 import com.agileproject.expense_tracker.helper.UserSession;
-import com.agileproject.expense_tracker.models.Error;
+import com.agileproject.expense_tracker.models.Errors;
 import com.agileproject.expense_tracker.models.User;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -90,11 +90,11 @@ public class LoginActivity extends AppCompatActivity {
 
         authBLL.setAuthListener(new AuthBLL.AuthListener() {
             @Override
-            public void onError(Error error) {
-                if (error.getField().equals("email")) {
-                    etEmail.setError(error.getMessage());
+            public void onError(Errors errors) {
+                if (errors.getField().equals("email")) {
+                    etEmail.setError(errors.getMessage());
                 } else {
-                    etPassword.setError(error.getMessage());
+                    etPassword.setError(errors.getMessage());
                 }
 
             }

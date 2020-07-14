@@ -12,7 +12,7 @@ import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.bll.AuthBLL;
 import com.agileproject.expense_tracker.helper.EditTextValidation;
 import com.agileproject.expense_tracker.helper.Helper;
-import com.agileproject.expense_tracker.models.Error;
+import com.agileproject.expense_tracker.models.Errors;
 import com.agileproject.expense_tracker.models.User;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -109,10 +109,10 @@ public class SignupActivity extends AppCompatActivity {
         authBLL.setAuthListener(new AuthBLL.AuthListener() {
 
             @Override
-            public void onError(Error error) {
+            public void onError(Errors errors) {
                 for (String key : errorMap.keySet()) {
-                    if (error.getField().equals(key)) {
-                        errorMap.get(error.getField()).setError(error.getMessage());
+                    if (errors.getField().equals(key)) {
+                        errorMap.get(errors.getField()).setError(errors.getMessage());
                     }
                 }
 
