@@ -52,4 +52,8 @@ public class CategoryBLL {
     public interface CategoryListener {
         void onError(Errors error);
     }
+
+    public void setCategoryListener(CategoryListener categoryListener) {
+        this.categoryListener = categoryListener;
+    }
 }
