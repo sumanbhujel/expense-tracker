@@ -36,7 +36,7 @@ public class CategoryBLL {
             if (!addCategoryResponse.isSuccessful()) {
                 apiError = gson.fromJson(addCategoryResponse.errorBody().string(), ApiError.class);
                 categoryListener.onError(apiError.getErrors());
-//                return  categoryResponse;
+                //return  categoryResponse;
             } else if (addCategoryResponse.body().getCategory() != null) {
                 categoryResponse = addCategoryResponse.body();
             }
