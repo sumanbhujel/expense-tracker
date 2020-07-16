@@ -19,6 +19,7 @@ public class CategoriesUnitTest {
         categoryBLL = new CategoryBLL();
     }
 
+    //adding new income category test
     @Test
     public void testA_emptyIncCatName_shouldNotAddANewCategory() {
         Category newCategory = new Category("", "Income", "others.png", "5da6c2393cc60c2cb021cdcb");
@@ -39,4 +40,28 @@ public class CategoriesUnitTest {
         CategoryResponse categoryResponse = categoryBLL.addNewCategory(newCategory);
         assertNull(categoryResponse);
     }
+
+    //adding expense category test
+    @Test
+    public void testD_emptyExpCatName_shouldNotAddANewCategory() {
+        Category newCategory = new Category("", "Expense", "others.png", "5da6c2393cc60c2cb021cdcb");
+        CategoryResponse categoryResponse = categoryBLL.addNewCategory(newCategory);
+        assertNull(categoryResponse);
+    }
+
+    @Test
+    public void testE_validExpCatName_shouldAddNewACategory() {
+        Category newCategory = new Category("Test Expense", "Expense", "others.png", "5da6c2393cc60c2cb021cdcb");
+        CategoryResponse categoryResponse = categoryBLL.addNewCategory(newCategory);
+        assertEquals(newCategory.getName(), categoryResponse.getCategory().getName());
+    }
+
+    @Test
+    public void testF_existingExpCatName_shouldNotAddANewCategory() {
+        Category newCategory = new Category("Test Expense", "Expense", "others.png", "5da6c2393cc60c2cb021cdcb");
+        CategoryResponse categoryResponse = categoryBLL.addNewCategory(newCategory);
+        assertNull(categoryResponse);
+    }
+
+
 }
