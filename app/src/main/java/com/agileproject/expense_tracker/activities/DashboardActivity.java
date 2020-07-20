@@ -57,8 +57,12 @@ public class DashboardActivity extends AppCompatActivity implements CardView.OnC
                 startActivity(i1);
                 break;
             case R.id.cardCategory:
-                //Intent i1 = new Intent(DashboardActivity.this, CategoryActivity.class);
-                //startActivity(i1);
+                Intent i2 = new Intent(DashboardActivity.this, AddCategoryActivity.class);
+                startActivity(i2);
+                break;
+            case R.id.cardAddIncome:
+                Intent i3 = new Intent(DashboardActivity.this, AddIncomeActivity.class);
+                startActivity(i3);
                 break;
             case R.id.cardAddExpenses:
 //                Intent i2 = new Intent(DashboardActivity.this, AddExpenseActivity.class);
@@ -68,10 +72,7 @@ public class DashboardActivity extends AppCompatActivity implements CardView.OnC
 //                Intent i3 = new Intent(DashboardActivity.this, TransactionListActivity.class);
 //                startActivity(i3);
                 break;
-            case R.id.cardAddIncome:
-//                Intent i4 = new Intent(DashboardActivity.this, AddIncomeActivity.class);
-//                startActivity(i4);
-                break;
+
             case R.id.cardShowChart:
 //                Intent i5 = new Intent(DashboardActivity.this, ChartActivity.class);
 //                startActivity(i5);
