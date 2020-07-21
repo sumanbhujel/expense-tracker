@@ -51,11 +51,29 @@ public class IncCategoriesBottomSheet extends BottomSheetDialogFragment
         creator = userSession.getUser().get_id();
     }
 
-
-
     @Override
     public void onCategorySelected(Category category) {
         incBottomSheetListener.onIncCatSelected(category);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        BSCategoriesAdapter incCatAdapter = new BSCategoriesAdapter(getActivity(), getAllIncomeCategories());
+        incCatAdapter.categorySelectedListener = this;
+        allCategoriesContainer.setAdapter(incCatAdapter);
+    }
+
+    private List<Category> getAllIncomeCategories() {
+        Helper.StrictMode();
+        allIncCat = categoryBLL.getIncomeCategories();
+        for (Category category : categoryBLL.getUserCategories(creator)) {
+            if (category.getType().equals("Income")) {
+                allIncCat.add(category);
+            }
+        }
+        return allIncCat;
     }
 
 

@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -47,6 +49,39 @@ public class CategoryBLL {
         return categoryResponse;
     }
 
+    //to get all income categories
+    public List<Category> getIncomeCategories() {
+        List<Category> incomeCategories = new ArrayList<>();
+        Call<CategoryResponse> incomeCategoriesCall = categoryAPI.fetchIncomeCategories();
+        try {
+            Response<CategoryResponse> incomeCategoriesResponse = incomeCategoriesCall.execute();
+            if (!incomeCategoriesResponse.isSuccessful()) {
+                return incomeCategories;
+            } else if (incomeCategoriesResponse.body().getCategories() != null) {
+                incomeCategories = incomeCategoriesResponse.body().getCategories();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return incomeCategories;
+    }
+
+    //to get user's income categories
+    public List<Category> getUserCategories(String userId) {
+        List<Category> userCategories = new ArrayList<>();
+        Call<CategoryResponse> userCategoriesCall = categoryAPI.fetchUserCategories(userId);
+        try {
+            Response<CategoryResponse> userCategoriesResponse = userCategoriesCall.execute();
+            if (!userCategoriesResponse.isSuccessful()) {
+                return userCategories;
+            } else if (userCategoriesResponse.body().getCategories() != null) {
+                userCategories = userCategoriesResponse.body().getCategories();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userCategories;
+    }
 
 
     public interface CategoryListener {
