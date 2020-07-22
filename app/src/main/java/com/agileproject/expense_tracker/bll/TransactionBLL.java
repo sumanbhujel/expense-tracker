@@ -33,8 +33,8 @@ public class TransactionBLL {
         try {
             Response<TransactionResponse> addTransactionResponse = addTransactionCall.execute();
             if (!addTransactionResponse.isSuccessful()) {
-                apiError = gson.fromJson(addTransactionResponse.errorBody().string(), ApiError.class);
-                transactionListener.onError(apiError.getErrors());
+//                apiError = gson.fromJson(addTransactionResponse.errorBody().string(), ApiError.class);
+//                transactionListener.onError(apiError.getErrors());
                 return transactionResponse;
             } else if (addTransactionResponse.body().getTransaction() != null) {
                 transactionResponse = addTransactionResponse.body();
