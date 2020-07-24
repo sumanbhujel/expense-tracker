@@ -47,4 +47,42 @@ public class TransactionUnitTest {
         assertEquals(100.0, transactionResponse.getTransaction().getAmount());
     }
 
+    @Test
+    public void testE_emptyExpAmount_shouldNotAddANewTransaction() {
+        Transaction newTransaction = new Transaction("Test Expense note", "Expense", "5d879975de6f522844aa111e", "2019-09-25", "5d90c4828fad49338c15706c");
+        TransactionResponse transactionResponse = transactionBLL.addNewTransaction(newTransaction);
+        assertNull(transactionResponse);
+    }
+
+    @Test
+    public void testF_negativeExpAmount_shouldNotAddANewTransaction() {
+        Transaction newTransaction = new Transaction("Test Expense note", "Expense", "5d879975de6f522844aa111e", "2019-09-25", "5d90c4828fad49338c15706c", -100);
+        TransactionResponse transactionResponse = transactionBLL.addNewTransaction(newTransaction);
+        assertNull(transactionResponse);
+    }
+
+    @Test
+    public void testG_zeroExpAmount_shouldNotAddANewTransaction() {
+        Transaction newTransaction = new Transaction("Test Expense note", "Expense", "5d879975de6f522844aa111e", "2019-09-25", "5d90c4828fad49338c15706c", 0);
+        TransactionResponse transactionResponse = transactionBLL.addNewTransaction(newTransaction);
+        assertNull(transactionResponse);
+    }
+
+    @Test
+    public void testH_validExpAmount_shouldAddANewTransaction() {
+        Transaction newTransaction = new Transaction("Test Expense note", "Expense", "5d879975de6f522844aa111e", "2019-09-25", "5d90c4828fad49338c15706c", 100);
+        TransactionResponse transactionResponse = transactionBLL.addNewTransaction(newTransaction);
+        assertEquals(100.0, transactionResponse.getTransaction().getAmount());
+    }
+
+
+
+    @Test
+    public void testI_emptyCategory_shouldNotAddANewTransaction() {
+        Transaction newTransaction = new Transaction("Test Income note", "Income", "5d879975de6f522844aa111e", "2019-09-25", "", 100);
+        TransactionResponse transactionResponse = transactionBLL.addNewTransaction(newTransaction);
+        assertNull(transactionResponse);
+    }
+
+
 }
