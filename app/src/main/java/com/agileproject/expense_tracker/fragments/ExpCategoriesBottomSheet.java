@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.adapters.BSCategoriesAdapter;
 import com.agileproject.expense_tracker.bll.CategoryBLL;
+import com.agileproject.expense_tracker.helper.Helper;
 import com.agileproject.expense_tracker.helper.UserSession;
 import com.agileproject.expense_tracker.models.Category;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
