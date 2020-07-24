@@ -84,6 +84,22 @@ public class CategoryBLL {
     }
 
 
+    public List<Category> getExpenseCategories() {
+        List<Category> expenseCategories = new ArrayList<>();
+        Call<CategoryResponse> expenseCategoriesCall = categoryAPI.fetchExpenseCategories();
+        try {
+            Response<CategoryResponse> expenseCategoriesResponse = expenseCategoriesCall.execute();
+            if (!expenseCategoriesResponse.isSuccessful()) {
+                return expenseCategories;
+            } else if (expenseCategoriesResponse.body().getCategories() != null) {
+                expenseCategories = expenseCategoriesResponse.body().getCategories();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expenseCategories;
+    }
+
     public interface CategoryListener {
         void onError(Errors error);
     }

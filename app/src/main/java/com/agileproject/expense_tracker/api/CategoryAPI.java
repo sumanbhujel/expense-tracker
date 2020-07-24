@@ -22,4 +22,8 @@ public interface CategoryAPI {
     //    get all the user's categories
     @GET("categories/users/{userId}")
     Call<CategoryResponse> fetchUserCategories(@Path("userId") String userId);
+
+    //    get all the default expense categories
+    @GET("categories/expense")
+    Call<CategoryResponse> fetchExpenseCategories();
 }

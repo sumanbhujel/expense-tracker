@@ -50,9 +50,31 @@ public class ExpCategoriesBottomSheet extends BottomSheetDialogFragment implemen
         creator = userSession.getUser().get_id();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        BSCategoriesAdapter expCatAdapter = new BSCategoriesAdapter(getActivity(), getAllExpenseCategories());
+        expCatAdapter.categorySelectedListener = this;
+        allCategoriesContainer.setAdapter(expCatAdapter);
+    }
+
+    //to get expense categories
+    private List<Category> getAllExpenseCategories() {
+        Helper.StrictMode();
+        allExpCat = categoryBLL.getExpenseCategories();
+        for (Category category : categoryBLL.getUserCategories(creator)) {
+            if (category.getType().equals("Expense")) {
+                allExpCat.add(category);
+            }
+        }
+        return allExpCat;
+    }
+
     public interface ExpBottomSheetListener {
         void onExpCatSelected(Category expCategory);
     }
+
     @Override
     public void onCategorySelected(Category category) {
         expBottomSheetListener.onExpCatSelected(category);
