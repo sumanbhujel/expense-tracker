@@ -8,6 +8,7 @@ import com.agileproject.expense_tracker.R;
 
 public class CategoryActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -62,25 +62,25 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
-//            categoryIcon = itemView.findViewById(R.id.iv_icon);
-//            categoryName = itemView.findViewById(R.id.tv_category_name);
-//            if (catDiv.equals("user")) {
-//                ImageButton btnCatDelete = itemView.findViewById(R.id.btn_cat_delete);
-//                btnCatDelete.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        ((CategoryActivity) context).confirmCategoryDelete(categoryList.get(getAdapterPosition()).get_id());
-//                    }
-//                });
-//
-//                ImageButton btnCatEdit = itemView.findViewById(R.id.btn_cat_edit);
-//                btnCatEdit.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        ((CategoryActivity) context).showCatUpdateDialog(categoryList.get(getAdapterPosition()).get_id());
-//                    }
-//                });
-//            }
+            categoryIcon = itemView.findViewById(R.id.iv_icon);
+            categoryName = itemView.findViewById(R.id.tv_category_name);
+            if (catDiv.equals("user")) {
+                ImageButton btnCatDelete = itemView.findViewById(R.id.btn_cat_delete);
+                btnCatDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((CategoryActivity) context).confirmCategoryDelete(categoryList.get(getAdapterPosition()).get_id());
+                    }
+                });
+
+                ImageButton btnCatEdit = itemView.findViewById(R.id.btn_cat_edit);
+                btnCatEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((CategoryActivity) context).showCatUpdateDialog(categoryList.get(getAdapterPosition()).get_id());
+                    }
+                });
+            }
 
         }
         public void bindData(Category category, String catDiv) {
