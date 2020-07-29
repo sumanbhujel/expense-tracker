@@ -7,6 +7,8 @@ import com.agileproject.expense_tracker.response.CategoryResponse;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
@@ -62,6 +64,20 @@ public class CategoriesUnitTest {
         CategoryResponse categoryResponse = categoryBLL.addNewCategory(newCategory);
         assertNull(categoryResponse);
     }
+
+    //showing categorylist test
+    @Test
+    public void testG_defaultExpenseCategoriesSize() {
+        List<Category> expCategories = categoryBLL.getExpenseCategories();
+        assertEquals(12, expCategories.size());
+    }
+
+    @Test
+    public void testH_defaultIncomeCategoriesSize() {
+        List<Category> incCategories = categoryBLL.getIncomeCategories();
+        assertEquals(4, incCategories.size());
+    }
+
 
 
 }
