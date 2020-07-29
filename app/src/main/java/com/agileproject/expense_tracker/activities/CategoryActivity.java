@@ -10,12 +10,13 @@ import android.widget.Button;
 
 import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.fragments.AllCategoriesFragment;
+import com.agileproject.expense_tracker.helper.ConfirmationDialog;
 
-public class CategoryActivity extends AppCompatActivity  {
+public class CategoryActivity extends AppCompatActivity implements ConfirmationDialog.ConfirmationDialogListener {
 
 
     private String categoryId = "";
-
+    private ConfirmationDialog confirmationDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,24 @@ public class CategoryActivity extends AppCompatActivity  {
 
     private void loadFragment(Fragment activeFragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, activeFragment).commit();
+
+    }
+
+    public void showCatUpdateDialog(String catId) {
+
+    }
+
+    public void confirmCategoryDelete(String catId) {
+
+    }
+
+    @Override
+    public void onSure() {
+
+    }
+
+    @Override
+    public void onCancel() {
 
     }
 }
