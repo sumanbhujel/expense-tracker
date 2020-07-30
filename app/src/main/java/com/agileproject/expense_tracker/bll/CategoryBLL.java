@@ -83,7 +83,7 @@ public class CategoryBLL {
         return userCategories;
     }
 
-
+    //to get  expense categories
     public List<Category> getExpenseCategories() {
         List<Category> expenseCategories = new ArrayList<>();
         Call<CategoryResponse> expenseCategoriesCall = categoryAPI.fetchExpenseCategories();
@@ -99,6 +99,47 @@ public class CategoryBLL {
         }
         return expenseCategories;
     }
+
+
+    //to get single category
+    public Category getSingleCategory(String categoryId) {
+        Category category = null;
+        Call<CategoryResponse> getACategoryCall = categoryAPI.fetchSingleCategory(categoryId);
+        try {
+            Response<CategoryResponse> getCategoryResponse = getACategoryCall.execute();
+            if (!getCategoryResponse.isSuccessful()) {
+                return category;
+            }
+            if (getCategoryResponse.body().getCategory() != null) {
+                category = getCategoryResponse.body().getCategory();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
+    //to update categoryy
+    public CategoryResponse updateUserCategory(String categoryId, Category category) {
+        CategoryResponse categoryResponse = null;
+        Call<CategoryResponse> updateCategoryCall = categoryAPI.updateCategory(categoryId, category);
+        try {
+            Response<CategoryResponse> updateCategoryResponse = updateCategoryCall.execute();
+            if (!updateCategoryResponse.isSuccessful()) {
+                apiError = gson.fromJson(updateCategoryResponse.errorBody().string(), ApiError.class);
+                categoryListener.onError(apiError.getErrors());
+//                return categoryResponse;
+            }
+            if (updateCategoryResponse.body() != null) {
+                categoryResponse = updateCategoryResponse.body();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return categoryResponse;
+    }
+
+
 
     public interface CategoryListener {
         void onError(Errors error);

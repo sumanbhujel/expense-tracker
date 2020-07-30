@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface CategoryAPI {
@@ -26,4 +27,13 @@ public interface CategoryAPI {
     //    get all the default expense categories
     @GET("categories/expense")
     Call<CategoryResponse> fetchExpenseCategories();
+
+    // get a single category
+    @GET("categories/{id}")
+    Call<CategoryResponse> fetchSingleCategory(@Path("id") String categoryId);
+
+    // update a category..
+    @PUT("categories/{id}")
+    Call<CategoryResponse> updateCategory(@Path("id") String categoryId, @Body Category category);
+
 }
