@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.agileproject.expense_tracker.R;
+import com.agileproject.expense_tracker.bll.CategoryBLL;
 import com.agileproject.expense_tracker.fragments.AllCategoriesFragment;
+import com.agileproject.expense_tracker.fragments.CategoryUpdateDialog;
 import com.agileproject.expense_tracker.helper.ConfirmationDialog;
+import com.agileproject.expense_tracker.helper.Helper;
 
 public class CategoryActivity extends AppCompatActivity implements ConfirmationDialog.ConfirmationDialogListener {
 
@@ -41,20 +45,28 @@ public class CategoryActivity extends AppCompatActivity implements ConfirmationD
     }
 
     public void showCatUpdateDialog(String catId) {
-
+        CategoryUpdateDialog dialog = new CategoryUpdateDialog();
+        dialog.getCategory(catId);
+        dialog.show(getSupportFragmentManager(), "UPDATE CATEGORY");
     }
 
     public void confirmCategoryDelete(String catId) {
-
+        categoryId = catId;
+        confirmationDialog = new ConfirmationDialog("Delete Category?", "Are you sure you want to delete this category?");
+        confirmationDialog.show(getSupportFragmentManager(), "DET");
     }
 
     @Override
     public void onSure() {
-
+        Helper.StrictMode();
+        if (new CategoryBLL().deleteUserCategory(categoryId)) {
+            Toast.makeText(this, "Category Deleted !", Toast.LENGTH_SHORT).show();
+            loadFragment(AllCategoriesFragment.newInstance("Categories"));
+        }
     }
 
     @Override
     public void onCancel() {
-
+        confirmationDialog.dismiss();
     }
 }

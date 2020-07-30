@@ -139,6 +139,24 @@ public class CategoryBLL {
         return categoryResponse;
     }
 
+    //to delete category
+    public boolean deleteUserCategory(String categoryId) {
+        boolean categoryDeleted = false;
+        Call<CategoryResponse> deleteCategoryCall = categoryAPI.deleteCategory(categoryId);
+        try {
+            Response<CategoryResponse> deleteCategoryResponse = deleteCategoryCall.execute();
+            if (!deleteCategoryResponse.isSuccessful()) {
+                return categoryDeleted;
+            }
+            if (deleteCategoryResponse.body().getCategory() != null) {
+                categoryDeleted = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return categoryDeleted;
+    }
+
 
 
     public interface CategoryListener {

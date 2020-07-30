@@ -5,6 +5,7 @@ import com.agileproject.expense_tracker.response.CategoryResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -35,5 +36,9 @@ public interface CategoryAPI {
     // update a category..
     @PUT("categories/{id}")
     Call<CategoryResponse> updateCategory(@Path("id") String categoryId, @Body Category category);
+
+    // delete a category
+    @DELETE("categories/{id}")
+    Call<CategoryResponse> deleteCategory(@Path("id") String categoryId);
 
 }
