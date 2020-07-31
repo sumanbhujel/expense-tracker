@@ -78,6 +78,31 @@ public class CategoriesUnitTest {
         assertEquals(4, incCategories.size());
     }
 
+    @Test
+    public void testI_validId_shouldUpdateCategory() {
+        String categoryId = "5dad09f22194501f788ca86c";
+        String newCategoryName = "Category Update Test";
+        Category newCategory = new Category(newCategoryName, "Expense", "others.png", "5da6c2393cc60c2cb021cdcb");
+        CategoryResponse updatedCategory = categoryBLL.updateUserCategory(categoryId, newCategory);
+        assertEquals(newCategoryName, updatedCategory.getCategory().getName());
+    }
+
+    @Test
+    public void testJ_invalidId_shouldReturnNull() {
+        String categoryId = "5dad08492194501f788ca789";
+        Category newCategory = new Category("Category Update Test", "Expense", "others.png", "5da6c2393cc60c2cb021cdcb");
+        CategoryResponse updatedCategory = categoryBLL.updateUserCategory(categoryId, newCategory);
+        assertNull(updatedCategory);
+    }
+
+    @Test
+    public void testK_emptyCatName_shouldDenyUpdate() {
+        String categoryId = "5dad09f22194501f788ca86c";
+        Category newCategory = new Category("", "Income", "others.png", "5da6c2393cc60c2cb021cdcb");
+        CategoryResponse categoryResponse = categoryBLL.updateUserCategory(categoryId, newCategory);
+        assertNull(categoryResponse);
+    }
+
 
 
 }
