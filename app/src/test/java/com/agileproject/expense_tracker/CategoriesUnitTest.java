@@ -10,7 +10,9 @@ import org.junit.Test;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNull;
+import static junit.framework.TestCase.assertTrue;
 
 public class CategoriesUnitTest {
 
@@ -78,6 +80,8 @@ public class CategoriesUnitTest {
         assertEquals(4, incCategories.size());
     }
 
+    //updating test
+
     @Test
     public void testI_validId_shouldUpdateCategory() {
         String categoryId = "5dad09f22194501f788ca86c";
@@ -101,6 +105,30 @@ public class CategoriesUnitTest {
         Category newCategory = new Category("", "Income", "others.png", "5da6c2393cc60c2cb021cdcb");
         CategoryResponse categoryResponse = categoryBLL.updateUserCategory(categoryId, newCategory);
         assertNull(categoryResponse);
+    }
+
+    //deleting test
+
+    @Test
+    public void testL_existingCatName_shouldDenyUpdate() {
+        String categoryId = "5dad09f22194501f788ca86c";
+        Category newCategory = new Category("Rental", "Income", "others.png", "5da6c2393cc60c2cb021cdcb");
+        CategoryResponse categoryResponse = categoryBLL.updateUserCategory(categoryId, newCategory);
+        assertNull(categoryResponse);
+    }
+
+    @Test
+    public void testM_validId_shouldDeleteUserCategory() {
+        String categoryId = "5dad09f22194501f788ca86c";
+        boolean categoryDeleted = categoryBLL.deleteUserCategory(categoryId);
+        assertTrue(categoryDeleted);
+    }
+
+    @Test
+    public void testN_invalidId_shouldReturnFalse() {
+        String categoryId = "5dad09f22194501f788ca86c";
+        boolean categoryDeleted = categoryBLL.deleteUserCategory(categoryId);
+        assertFalse(categoryDeleted);
     }
 
 
