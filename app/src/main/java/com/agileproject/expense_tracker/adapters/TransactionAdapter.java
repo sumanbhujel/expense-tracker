@@ -54,12 +54,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         public TransactionViewHolder(@NonNull View itemView) {
             super(itemView);
-//            transIcon = itemView.findViewById(R.id.iv_trans_icon);
-//            transType = itemView.findViewById(R.id.tv_trans_type);
-//            transNote = itemView.findViewById(R.id.tv_trans_note);
-//            transDate = itemView.findViewById(R.id.tv_trans_date);
-//            transCategory = itemView.findViewById(R.id.tv_trans_category);
-//            transAmount = itemView.findViewById(R.id.tv_trans_amount);
+            transIcon = itemView.findViewById(R.id.iv_trans_icon);
+            transType = itemView.findViewById(R.id.tv_trans_type);
+            transNote = itemView.findViewById(R.id.tv_trans_note);
+            transDate = itemView.findViewById(R.id.tv_trans_date);
+            transCategory = itemView.findViewById(R.id.tv_trans_category);
+            transAmount = itemView.findViewById(R.id.tv_trans_amount);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,22 +69,22 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             });
         }
 
-//        public void bindData(TransactionR transaction) {
-//            transType.setText(transaction.getType());
-//            if (transaction.getType().equals("Expense")) {
-//                transAmount.setText("-" + transaction.getAmount());
-//                transAmount.setTextColor(context.getResources().getColor(R.color.red));
-//                transType.setTextColor(context.getResources().getColor(R.color.red));
-//            } else {
-//                transAmount.setText("+" + transaction.getAmount());
-//                transAmount.setTextColor(context.getResources().getColor(R.color.greencolor));
-//                transType.setTextColor(context.getResources().getColor(R.color.greencolor));
-//            }
-//            transNote.setText(transaction.getNote());
-//            transCategory.setText(transaction.getCategory().getName());
-//            transDate.setText(Helper.formatDate("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "MM/dd", transaction.getDate()));
-//            Helper.setIcon(transaction.getCategory().getIcon(), transIcon);
-//        }
+        public void bindData(TransactionR transaction) {
+            transType.setText(transaction.getType());
+            if (transaction.getType().equals("Expense")) {
+                transAmount.setText("-" + transaction.getAmount());
+                transAmount.setTextColor(context.getResources().getColor(R.color.red));
+                transType.setTextColor(context.getResources().getColor(R.color.red));
+            } else {
+                transAmount.setText("+" + transaction.getAmount());
+                transAmount.setTextColor(context.getResources().getColor(R.color.greencolor));
+                transType.setTextColor(context.getResources().getColor(R.color.greencolor));
+            }
+            transNote.setText(transaction.getNote());
+            transCategory.setText(transaction.getCategory().getName());
+            transDate.setText(Helper.formatDate("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "MM/dd", transaction.getDate()));
+            Helper.setIcon(transaction.getCategory().getIcon(), transIcon);
+        }
     }
 
     public void updateTransactionsList(List<TransactionR> transactionList) {
