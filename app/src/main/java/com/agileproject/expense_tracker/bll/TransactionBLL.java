@@ -46,6 +46,22 @@ public class TransactionBLL {
         return transactionResponse;
     }
 
+    //to get transaction list
+    public TransactionResponse getTransactions(String creator) {
+        TransactionResponse transactionResponse = null;
+        Call<TransactionResponse> myTransactionsCall = transactionAPI.getMyTransactions(creator);
+        try {
+            Response<TransactionResponse> myTransactionsResponse = myTransactionsCall.execute();
+            if (!myTransactionsResponse.isSuccessful()) {
+                return transactionResponse;
+            }
+            transactionResponse = myTransactionsResponse.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return transactionResponse;
+    }
+
     public interface TransactionListener {
         void onError(Errors error);
     }
