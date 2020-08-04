@@ -84,5 +84,12 @@ public class TransactionUnitTest {
         assertNull(transactionResponse);
     }
 
+    //test to get my transaction list
+    @Test
+    public void testJ_transactionSize() {
+        TransactionResponse transactionResponse = transactionBLL.getTransactions("5d879975de6f522844aa111e");
+        assertEquals(2, transactionResponse.getMyTransactions().size());
+    }
+
 
 }
