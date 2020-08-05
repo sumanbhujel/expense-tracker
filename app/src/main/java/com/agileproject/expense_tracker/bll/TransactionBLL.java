@@ -62,6 +62,23 @@ public class TransactionBLL {
         return transactionResponse;
     }
 
+    // to get single transaction detail
+    public TransactionResponse getSingleTransaction(String transactionId) {
+        TransactionResponse transactionResponse = null;
+        Call<TransactionResponse> singleTransactionCall = transactionAPI.fetchSingleTransaction(transactionId);
+        try {
+            Response<TransactionResponse> singleTransactionsResponse = singleTransactionCall.execute();
+            if (!singleTransactionsResponse.isSuccessful()) {
+                return transactionResponse;
+            }
+            transactionResponse = singleTransactionsResponse.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return transactionResponse;
+    }
+
+
     public interface TransactionListener {
         void onError(Errors error);
     }

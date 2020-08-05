@@ -18,4 +18,8 @@ public interface TransactionAPI {
     //    get user transactions
     @GET("transactions/users/{creator}")
     Call<TransactionResponse> getMyTransactions(@Path("creator") String creator);
+
+    // get single transaction
+    @GET("transactions/{id}")
+    Call<TransactionResponse> fetchSingleTransaction(@Path("id") String transactionId);
 }
