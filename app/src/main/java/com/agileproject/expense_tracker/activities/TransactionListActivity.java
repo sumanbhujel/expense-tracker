@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.adapters.TransactionAdapter;
 import com.agileproject.expense_tracker.bll.TransactionBLL;
+import com.agileproject.expense_tracker.fragments.TransactionDetailDialog;
+import com.agileproject.expense_tracker.helper.ConfirmationDialog;
 import com.agileproject.expense_tracker.helper.Helper;
 import com.agileproject.expense_tracker.helper.UserSession;
 import com.agileproject.expense_tracker.models.TransactionR;
@@ -18,7 +21,8 @@ import com.agileproject.expense_tracker.response.TransactionResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class TransactionListActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
+        ConfirmationDialog.ConfirmationDialogListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private TransactionAdapter transactionAdapter;
@@ -28,6 +32,7 @@ public class TransactionListActivity extends AppCompatActivity implements SwipeR
     private String category = "";
     private String transactionId = "";
     private TransactionR transaction = null;
+    private ConfirmationDialog confirmationDialog;
 
 
     @Override
@@ -81,6 +86,18 @@ public class TransactionListActivity extends AppCompatActivity implements SwipeR
         }
     }
 
+    public void showTranUpdateDialog(String tranId) {
+        TransactionDetailDialog dialog = new TransactionDetailDialog();
+        dialog.getTransaction(tranId);
+        dialog.show(getSupportFragmentManager(), "UPDATE CATEGORY");
+    }
+
+    public void confirmCategoryDelete(String tranId) {
+        transactionId = tranId;
+        confirmationDialog = new ConfirmationDialog("Delete Transaction?", "Are you sure you want to delete this category?");
+        confirmationDialog.show(getSupportFragmentManager(), "DET");
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -90,5 +107,18 @@ public class TransactionListActivity extends AppCompatActivity implements SwipeR
     @Override
     public void onRefresh() {
         showTransactions();
+    }
+
+    @Override
+    public void onSure() {
+        if (new TransactionBLL().deleteTransaction(transactionId)) {
+            Toast.makeText(this, "Transaction Deleted !", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    @Override
+    public void onCancel() {
+        confirmationDialog.dismiss();
     }
 }

@@ -78,6 +78,24 @@ public class TransactionBLL {
         return transactionResponse;
     }
 
+    //to delete transaction
+    public boolean deleteTransaction(String transactionId) {
+        boolean transactionDeleted = false;
+        Call<TransactionResponse> deleteTransactionCall = transactionAPI.deleteTransaction(transactionId);
+        try {
+            Response<TransactionResponse> deleteTransactionResponse = deleteTransactionCall.execute();
+            if (!deleteTransactionResponse.isSuccessful()) {
+                return transactionDeleted;
+            }
+            if (deleteTransactionResponse.body() != null) {
+                transactionDeleted = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return transactionDeleted;
+    }
+
 
     public interface TransactionListener {
         void onError(Errors error);
