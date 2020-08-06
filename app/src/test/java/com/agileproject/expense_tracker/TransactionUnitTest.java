@@ -111,6 +111,21 @@ public class TransactionUnitTest {
         assertNull(updateTransactionResponse);
     }
 
+    //test for deleting transaction
+    @Test
+    public void testM_validId_shouldDeleteTransaction() {
+        String transactionId = "5dad0dbe2194501f788ca877";
+        boolean transactionDeleted = transactionBLL.deleteTransaction(transactionId);
+        assertTrue(transactionDeleted);
+    }
+
+    @Test
+    public void testN_invalidId_shouldReturnFalse() {
+        String transactionId = "5d879975de6f522844aa111e";
+        boolean transactionDeleted = transactionBLL.deleteTransaction(transactionId);
+        assertFalse(transactionDeleted);
+    }
+
 
 
 
