@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface TransactionAPI {
@@ -27,4 +28,8 @@ public interface TransactionAPI {
     // delete a transaction
     @DELETE("transactions/{id}")
     Call<TransactionResponse> deleteTransaction(@Path("id") String transactionId);
+
+    // update a transaction
+    @PUT("transactions/{id}")
+    Call<TransactionResponse> updateTransaction(@Path("id") String transactionId, @Body Transaction transaction);
 }

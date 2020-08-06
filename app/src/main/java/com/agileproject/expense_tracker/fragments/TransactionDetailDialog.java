@@ -18,8 +18,10 @@ import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.activities.TransactionListActivity;
 import com.agileproject.expense_tracker.bll.TransactionBLL;
 import com.agileproject.expense_tracker.helper.ConfirmationDialog;
+import com.agileproject.expense_tracker.helper.EditTextValidation;
 import com.agileproject.expense_tracker.helper.Helper;
 import com.agileproject.expense_tracker.helper.UserSession;
+import com.agileproject.expense_tracker.models.Transaction;
 import com.agileproject.expense_tracker.models.TransactionR;
 import com.agileproject.expense_tracker.response.TransactionResponse;
 import com.google.android.material.textfield.TextInputLayout;
@@ -68,8 +70,8 @@ public class TransactionDetailDialog extends AppCompatDialogFragment implements 
         btnDeleteTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //((TransactionListActivity) getContext()).confirmCategoryDelete(transactionId);
-                //dismiss();
+                ((TransactionListActivity) getContext()).confirmCategoryDelete(transactionId);
+                dismiss();
 
             }
         });
@@ -78,8 +80,8 @@ public class TransactionDetailDialog extends AppCompatDialogFragment implements 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //updateTransaction();
-               // Toast.makeText(getActivity(), "amoount"+tvAmount.getEditText().getText().toString().trim(), Toast.LENGTH_SHORT).show();
+                updateTransaction();
+                Toast.makeText(getActivity(), "amoount"+tvAmount.getEditText().getText().toString().trim(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,13 +126,38 @@ public class TransactionDetailDialog extends AppCompatDialogFragment implements 
 
     }
 
+    private void updateTransaction() {
+
+        if (!EditTextValidation.isEmpty(tvNote) & !EditTextValidation.isEmpty(tvAmount)) {
+            Helper.StrictMode();
+
+            String note = tvNote.getEditText().getText().toString().trim();
+            double amount = Double.parseDouble(tvAmount.getEditText().getText().toString().trim());
+            String transactionDate = tvDate.getEditText().getText().toString().trim();
+            Transaction updateTransaction = new Transaction(note, transaction.getType(), creator, transactionDate, transaction.getCategory().getName(), amount);
+            TransactionResponse transactionResponse = transactionBLL.updateTransaction(transaction.get_id(), updateTransaction);
+            if (transactionResponse != null) {
+                this.dismiss();
+                Toast.makeText(getActivity(), transactionResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getTransactionDetail();
+    }
+
     @Override
     public void onSure() {
-
+        if (transactionBLL.deleteTransaction(transactionId)) {
+            Toast.makeText(getContext(), "Transaction successfully deleted!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onCancel() {
-
+        deleteTransDialog.dismiss();
     }
 }

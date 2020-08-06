@@ -96,6 +96,27 @@ public class TransactionBLL {
         return transactionDeleted;
     }
 
+    //to update transaction
+    public TransactionResponse updateTransaction(String transactionId, Transaction transaction) {
+        TransactionResponse transactionResponse = null;
+        Call<TransactionResponse> updateTransactionCall = transactionAPI.updateTransaction(transactionId, transaction);
+        try {
+            Response<TransactionResponse> updateTransactionResponse = updateTransactionCall.execute();
+            if (!updateTransactionResponse.isSuccessful()) {
+//                apiError = gson.fromJson(updateTransactionResponse.errorBody().string(), APIError.class);
+//                transactionListener.onError(apiError.getError());
+                return transactionResponse;
+            }
+            if (updateTransactionResponse.body().getTransaction() != null) {
+                transactionResponse = updateTransactionResponse.body();
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return transactionResponse;
+    }
+
 
     public interface TransactionListener {
         void onError(Errors error);

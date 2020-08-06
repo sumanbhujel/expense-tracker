@@ -64,7 +64,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // ((TransactionListActivity) context).showTranUpdateDialog(transactionList.get(getAdapterPosition()).get_id());
+                    ((TransactionListActivity) context).showTranUpdateDialog(transactionList.get(getAdapterPosition()).get_id());
                 }
             });
         }
