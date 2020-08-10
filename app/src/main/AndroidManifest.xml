@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activities.TransactionListActivity"></activity>
+        <activity android:name=".activities.ChartActivity"></activity>
+        <activity android:name=".activities.TransactionListActivity" />
         <activity
             android:name=".activities.CategoryActivity"
             android:parentActivityName=".activities.DashboardActivity"
