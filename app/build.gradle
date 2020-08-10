@@ -22,6 +22,11 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -31,6 +36,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    //for design
     implementation 'com.google.android.material:material:1.2.0'
 
     // retrofit
@@ -40,6 +46,10 @@ dependencies {
     // http logger
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
 
+    //for circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //to make chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }
