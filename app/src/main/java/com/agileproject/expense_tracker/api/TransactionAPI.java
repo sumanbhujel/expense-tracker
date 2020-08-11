@@ -32,4 +32,8 @@ public interface TransactionAPI {
     // update a transaction
     @PUT("transactions/{id}")
     Call<TransactionResponse> updateTransaction(@Path("id") String transactionId, @Body Transaction transaction);
+
+    // get income transactions
+    @GET("transactions/users/{creator}/incomes")
+    Call<TransactionResponse> getIncomes(@Path("creator") String creator);
 }

@@ -8,7 +8,10 @@ import android.os.Bundle;
 
 import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.bll.TransactionBLL;
+import com.agileproject.expense_tracker.helper.Helper;
 import com.agileproject.expense_tracker.helper.UserSession;
+import com.agileproject.expense_tracker.models.TransactionR;
+import com.agileproject.expense_tracker.response.TransactionResponse;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -93,5 +96,23 @@ public class ChartActivity extends AppCompatActivity {
 
         pieChart.setData(pieData);
         pieChart.invalidate();
+    }
+
+    private void getIncomeTransactions() {
+        myTransactions.clear();
+        Helper.StrictMode();
+        TransactionResponse incomes = transactionBLL.getIncomeTransactions(userSession.getUser().get_id());
+        if (incomes != null) {
+            for (TransactionR transaction : incomes.getMyTransactions()) {
+                String key = transaction.getCategory().getName();
+                if (myTransactions.containsKey(key)) {
+                    myTransactions.put(key, myTransactions.get(key) + transaction.getAmount());
+                } else {
+                    myTransactions.put(key, transaction.getAmount());
+                }
+            }
+
+            drawChart();
+        }
     }
 }

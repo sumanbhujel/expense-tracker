@@ -118,6 +118,23 @@ public class TransactionBLL {
     }
 
 
+    //to get income transaction
+    public TransactionResponse getIncomeTransactions(String creator) {
+        TransactionResponse incomes = null;
+        Call<TransactionResponse> incomeTransactionsCall = transactionAPI.getIncomes(creator);
+        try {
+            Response<TransactionResponse> incomeTransactionsResponse = incomeTransactionsCall.execute();
+            if (!incomeTransactionsResponse.isSuccessful()) {
+                return incomes;
+            }
+            incomes = incomeTransactionsResponse.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return incomes;
+    }
+
+
     public interface TransactionListener {
         void onError(Errors error);
     }
