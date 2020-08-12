@@ -115,4 +115,22 @@ public class ChartActivity extends AppCompatActivity {
             drawChart();
         }
     }
+
+    private void getExpenseTransactions() {
+        myTransactions.clear();
+        Helper.StrictMode();
+        TransactionResponse expenses = transactionBLL.getExpenseTransactions(userSession.getUser().get_id());
+        if (expenses != null) {
+            for (TransactionR transaction : expenses.getMyTransactions()) {
+                String key = transaction.getCategory().getName();
+                if (myTransactions.containsKey(key)) {
+                    myTransactions.put(key, myTransactions.get(key) + transaction.getAmount());
+                } else {
+                    myTransactions.put(key, transaction.getAmount());
+                }
+            }
+
+            drawChart();
+        }
+    }
 }

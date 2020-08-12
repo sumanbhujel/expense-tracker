@@ -36,4 +36,8 @@ public interface TransactionAPI {
     // get income transactions
     @GET("transactions/users/{creator}/incomes")
     Call<TransactionResponse> getIncomes(@Path("creator") String creator);
+
+    // get expense transactions
+    @GET("transactions/users/{creator}/expenses")
+    Call<TransactionResponse> getExpenses(@Path("creator") String creator);
 }

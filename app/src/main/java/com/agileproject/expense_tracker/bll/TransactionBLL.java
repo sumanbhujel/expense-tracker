@@ -134,6 +134,22 @@ public class TransactionBLL {
         return incomes;
     }
 
+    //to get expense transaction
+    public TransactionResponse getExpenseTransactions(String creator) {
+        TransactionResponse expenses = null;
+        Call<TransactionResponse> expenseTransactionsCall = transactionAPI.getExpenses(creator);
+        try {
+            Response<TransactionResponse> expenseTransactionsResponse = expenseTransactionsCall.execute();
+            if (!expenseTransactionsResponse.isSuccessful()) {
+                return expenses;
+            }
+            expenses = expenseTransactionsResponse.body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return expenses;
+    }
+
 
     public interface TransactionListener {
         void onError(Errors error);
