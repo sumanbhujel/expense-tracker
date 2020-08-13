@@ -1,10 +1,19 @@
 package com.agileproject.expense_tracker.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.bll.TransactionBLL;
@@ -132,5 +141,43 @@ public class ChartActivity extends AppCompatActivity {
 
             drawChart();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_chart,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.sp_trans_type);
+        Spinner spinner = (Spinner) menuItem.getActionView();
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.transactions_type, R.layout.spinner_trans_type);
+        adapter.setDropDownViewResource(R.layout.spinner_trans_type);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String transType = String.valueOf(parent.getItemAtPosition(position));
+                if (transType.equals("Expense")) {
+                    getExpenseTransactions();
+                } else if (transType.equals("Income")) {
+                    getIncomeTransactions();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(ChartActivity.this, "Nothing selected!!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }
