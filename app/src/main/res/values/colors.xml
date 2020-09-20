@@ -13,11 +13,14 @@
     <color name="lightgray">#ededed</color>
     <color name="deeppurple">#7c4dff</color>
     <color name="yello">#ffb300</color>
-    <color name="green">#00bfa5</color>
+    <color name="green">#25E12E</color>
     <color name="darkblue">#23283a</color>
     <color name="testcolorblue">#152b38</color>
-    <color name="red">#B02727</color>
+    <color name="red">#F80505</color>
     <color name="black_overlay">#66000000</color>
     <color name="colorBackground">#F5F5F5</color>
     <color name="colorIconBg">#e0e0e0</color>
+
+    <color name="colorYellow">#fece2f</color>
+    <color name="collarYellowDark">#c79d00</color>
 </resources>

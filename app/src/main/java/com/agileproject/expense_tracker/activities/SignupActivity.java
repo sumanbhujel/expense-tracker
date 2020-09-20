@@ -76,10 +76,10 @@ public class SignupActivity extends AppCompatActivity {
 
             if (authBLL.registerUser(user)) {
 
-                //Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 Toast.makeText(this, "Successfully registered !", Toast.LENGTH_SHORT).show();
                 finish();
-                //startActivity(intent);
+                startActivity(intent);
 
             }
         } else if (!isPasswordConfirmed()) {

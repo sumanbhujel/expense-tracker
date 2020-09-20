@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
+
     }
 
     private void signIn() {
@@ -77,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateDashboard() {
-        Intent mainActivity = new Intent(this, MainActivity.class);
+        Intent mainActivity = new Intent(this, DashboardActivity.class);
         mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainActivity);
 
@@ -90,11 +91,11 @@ public class LoginActivity extends AppCompatActivity {
 
         authBLL.setAuthListener(new AuthBLL.AuthListener() {
             @Override
-            public void onError(Errors errors) {
-                if (errors.getField().equals("email")) {
-                    etEmail.setError(errors.getMessage());
+            public void onError(Errors error) {
+                if (error.getField().equals("email")) {
+                    etEmail.setError(error.getMessage());
                 } else {
-                    etPassword.setError(errors.getMessage());
+                    etPassword.setError(error.getMessage());
                 }
 
             }

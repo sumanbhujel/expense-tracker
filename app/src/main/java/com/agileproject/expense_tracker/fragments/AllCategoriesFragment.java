@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AllCategoriesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class AllCategoriesFragment extends Fragment {
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -35,9 +35,6 @@ public class AllCategoriesFragment extends Fragment implements SwipeRefreshLayou
     private TextView myCategories;
     private RecyclerView defaultCategoriesContainer;
     private RecyclerView userCategoriesContainer;
-
-    private SwipeRefreshLayout swipeRefreshLayout;
-    int number = 0;
 
     public AllCategoriesFragment() {
         // Required empty public constructor
@@ -70,18 +67,6 @@ public class AllCategoriesFragment extends Fragment implements SwipeRefreshLayou
 
         divider = categoriesView.findViewById(R.id.divider);
         myCategories = categoriesView.findViewById(R.id.tv_my_categories);
-        swipeRefreshLayout = categoriesView.findViewById(R.id.refreshLayout);
-        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                number++;
-                swipeRefreshLayout.setRefreshing(false);
-                showDefaultCategories();
-                showUserCategories();
-
-            }
-        });
 
         defaultCategoriesContainer = categoriesView.findViewById(R.id.def_categories_container);
         defaultCategoriesContainer.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -92,7 +77,8 @@ public class AllCategoriesFragment extends Fragment implements SwipeRefreshLayou
     }
 
     @Override
-    public void onRefresh() {
+    public void onResume() {
+        super.onResume();
         showDefaultCategories();
         showUserCategories();
     }

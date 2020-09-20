@@ -8,8 +8,8 @@ public class Retrofit {
 
     private static retrofit2.Retrofit retrofit;
 
-    private static final String BASE_URL = "http://10.0.2.2:8080/api/";
-    public static final String IMAGE_URL = "http://10.0.2.2:8080/icons/";
+    private static final String BASE_URL = "http://10.0.2.2:7000/api/";
+    public static final String IMAGE_URL = "http://10.0.2.2:7000/icons/";
 
 
     public static retrofit2.Retrofit getInstance() {

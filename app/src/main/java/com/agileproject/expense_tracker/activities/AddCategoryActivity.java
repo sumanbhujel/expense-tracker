@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.agileproject.expense_tracker.R;
 import com.agileproject.expense_tracker.adapters.AddCategoryAdapter;
+import com.agileproject.expense_tracker.fragments.AddExpCategory;
 import com.agileproject.expense_tracker.fragments.AddIncCategory;
 import com.google.android.material.tabs.TabLayout;
 
@@ -23,7 +24,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         AddCategoryAdapter addCategoryAdapter = new AddCategoryAdapter(getSupportFragmentManager());
-        //addCategoryAdapter.addFragment(new AddExpCategory(), "Expense");
+        addCategoryAdapter.addFragment(new AddExpCategory(), "Expense");
         addCategoryAdapter.addFragment(new AddIncCategory(), "Income");
 
         viewPager.setAdapter(addCategoryAdapter);

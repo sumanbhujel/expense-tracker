@@ -81,7 +81,7 @@ public class TransactionDetailDialog extends AppCompatDialogFragment implements 
             @Override
             public void onClick(View v) {
                 updateTransaction();
-                Toast.makeText(getActivity(), "amoount"+tvAmount.getEditText().getText().toString().trim(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Transaction Updated", Toast.LENGTH_SHORT).show();
             }
         });
 

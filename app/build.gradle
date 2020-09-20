@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //for design
-    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
 
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'

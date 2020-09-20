@@ -77,8 +77,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 transType.setTextColor(context.getResources().getColor(R.color.red));
             } else {
                 transAmount.setText("+" + transaction.getAmount());
-                transAmount.setTextColor(context.getResources().getColor(R.color.greencolor));
-                transType.setTextColor(context.getResources().getColor(R.color.greencolor));
+                transAmount.setTextColor(context.getResources().getColor(R.color.green));
+                transType.setTextColor(context.getResources().getColor(R.color.green));
             }
             transNote.setText(transaction.getNote());
             transCategory.setText(transaction.getCategory().getName());

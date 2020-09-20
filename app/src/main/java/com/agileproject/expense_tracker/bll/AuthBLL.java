@@ -40,7 +40,7 @@ public class AuthBLL {
             Response<UserResponse> signUpResponse = signUpCall.execute();
             if (!signUpResponse.isSuccessful()) {
                 apiError = gson.fromJson(signUpResponse.errorBody().string(), ApiError.class);
-                authListener.onError(apiError.getErrors());
+                  authListener.onError(apiError.getErrors());
 //                return isSignUpSuccessful;
             } else if (signUpResponse.body().getUser() != null) {
                 isSignUpSuccessful = true;
@@ -61,7 +61,7 @@ public class AuthBLL {
             Response<UserResponse> loginResponse = loginCall.execute();
             if (!loginResponse.isSuccessful()) {
                 apiError = gson.fromJson(loginResponse.errorBody().string(), ApiError.class);
-                authListener.onError(apiError.getErrors());
+//                authListener.onError(apiError.getErrors());
 //                return user;
             } else if (loginResponse.body().getUser() != null) {
                 user = loginResponse.body().getUser();
@@ -90,7 +90,7 @@ public class AuthBLL {
     }
 
 
-    public interface AuthListener{
+    public interface AuthListener {
         void onError(Errors errors);
     }
 

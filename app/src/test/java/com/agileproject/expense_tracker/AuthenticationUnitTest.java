@@ -28,14 +28,14 @@ public class AuthenticationUnitTest {
     }
 
     @Test
-    public void testB_invalidSignUpInputs_shouldNotCreateANewUser() {
-        User user = new User("U", "Test", "unittest@example.com", "password");
+    public void testC_validSignUpInputs_shouldCreateANewUser() {
+        User user = new User("Neww", "Test", "unittest@example.com", "password");
         boolean signedUp = authBLL.registerUser(user);
         assertFalse(signedUp);
     }
 
     @Test
-    public void testC_validSignUpInputs_shouldCreateANewUser() {
+    public void testB_invalidSignUpInputs_shouldNotCreateANewUser() {
         User user = new User("New", "Name", "new@example.com", "new");
         boolean signedUp = authBLL.registerUser(user);
         assertTrue(signedUp);
